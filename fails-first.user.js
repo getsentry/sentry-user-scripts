@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fails-first
 // @namespace    https://asottile.dev
-// @version      0.1
+// @version      0.2
 // @description  put failed statuses first
 // @author       asottile
 // @match        https://github.com/*
@@ -18,6 +18,7 @@
             return;
         }
 
+        let failsRequired = [];
         let fails = [];
         let pending = [];
         let skipped = [];
@@ -27,13 +28,18 @@
                 skipped.push(child);
             } else if (child.querySelector('.octicon-x')) {
                 child.parentNode.removeChild(child);
+                const isRequired = Array.from(child.querySelectorAll('span')).some(el => el.textContent === 'Required');
+                if(isRequired) {
+                    failsRequired.push(child);
+                    continue;
+                }
                 fails.push(child);
             } else if (child.querySelector('.anim-rotate, .octicon-dot-fill')) {
                 child.parentNode.removeChild(child);
                 pending.push(child);
             }
         }
-        lst.prepend(...fails, ...pending, ...skipped);
+        lst.prepend(...failsRequired, ...fails, ...pending, ...skipped);
 
         observer.takeRecords(); // prevent recursing infinitely
     }).observe(document.documentElement, {childList: true, subtree: true});
