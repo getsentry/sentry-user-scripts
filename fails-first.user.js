@@ -12,13 +12,35 @@
 (function() {
     'use strict';
 
+    function cmp(left, right) {
+        window.wat = left;
+        // sort required first
+        const leftRequired = left.innerText.indexOf('Required') >= 0;
+        const rightRequired = right.innerText.indexOf('Required') >= 0;
+        if (leftRequired && !rightRequired) {
+            return -1;
+        } else if (!leftRequired && rightRequired) {
+            return 1;
+        }
+
+        // then sort by name
+        const leftText = left.querySelector('.status-check-item-body strong').innerText;
+        const rightText = right.querySelector('.status-check-item-body strong').innerText;
+        if (leftText < rightText) {
+            return -1;
+        } else if (leftText > rightText) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     new MutationObserver((_, observer) => {
         const lst = document.querySelector('.merge-status-list.js-updatable-content-preserve-scroll-position');
         if (!lst) {
             return;
         }
 
-        let failsRequired = [];
         let fails = [];
         let pending = [];
         let skipped = [];
@@ -28,18 +50,16 @@
                 skipped.push(child);
             } else if (child.querySelector('.octicon-x')) {
                 child.parentNode.removeChild(child);
-                const isRequired = Array.from(child.querySelectorAll('span')).some(el => el.textContent === 'Required');
-                if(isRequired) {
-                    failsRequired.push(child);
-                    continue;
-                }
                 fails.push(child);
             } else if (child.querySelector('.anim-rotate, .octicon-dot-fill')) {
                 child.parentNode.removeChild(child);
                 pending.push(child);
             }
         }
-        lst.prepend(...failsRequired, ...fails, ...pending, ...skipped);
+        fails.sort(cmp);
+        pending.sort(cmp);
+        skipped.sort(cmp);
+        lst.prepend(...fails, ...pending, ...skipped);
 
         observer.takeRecords(); // prevent recursing infinitely
     }).observe(document.documentElement, {childList: true, subtree: true});
