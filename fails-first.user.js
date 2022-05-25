@@ -48,7 +48,7 @@
             if (child.querySelector('.octicon-skip')) {
                 child.parentNode.removeChild(child);
                 skipped.push(child);
-            } else if (child.querySelector('.octicon-x')) {
+            } else if (child.querySelector('.octicon-x') || child.querySelector('.octicon-stop')) {
                 child.parentNode.removeChild(child);
                 fails.push(child);
             } else if (child.querySelector('.anim-rotate, .octicon-dot-fill')) {
