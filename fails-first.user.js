@@ -13,7 +13,6 @@
     'use strict';
 
     function cmp(left, right) {
-        window.wat = left;
         // sort required first
         const leftRequired = left.innerText.indexOf('Required') >= 0;
         const rightRequired = right.innerText.indexOf('Required') >= 0;
