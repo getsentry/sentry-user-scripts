@@ -23,8 +23,8 @@
         }
 
         // then sort by name
-        const leftText = left.querySelector('.status-check-item-body strong').innerText;
-        const rightText = right.querySelector('.status-check-item-body strong').innerText;
+        const leftText = left.querySelector('strong[title]').innerText;
+        const rightText = right.querySelector('strong[title]').innerText;
         if (leftText < rightText) {
             return -1;
         } else if (leftText > rightText) {
