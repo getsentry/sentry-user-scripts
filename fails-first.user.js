@@ -43,23 +43,29 @@
         let fails = [];
         let pending = [];
         let skipped = [];
+        let other = [];
         for (let child of lst.querySelectorAll('.merge-status-item')) {
             if (child.querySelector('.octicon-skip')) {
-                child.parentNode.removeChild(child);
                 skipped.push(child);
             } else if (child.querySelector('.octicon-x') || child.querySelector('.octicon-stop')) {
-                child.parentNode.removeChild(child);
                 fails.push(child);
             } else if (child.querySelector('.anim-rotate, .octicon-dot-fill')) {
-                child.parentNode.removeChild(child);
                 pending.push(child);
+            } else {
+                other.push(child);
             }
         }
         fails.sort(cmp);
         pending.sort(cmp);
         skipped.sort(cmp);
-        lst.prepend(...fails, ...pending, ...skipped);
+        other.sort(cmp);
 
-        observer.takeRecords(); // prevent recursing infinitely
+        const all = [...fails, ...pending, ...skipped, ...other];
+        for (let idx in all) {
+            if (all[idx] !== lst.children[idx]) {
+                lst.prepend(...all);
+                return;
+            }
+        }
     }).observe(document.documentElement, {childList: true, subtree: true});
 })();
