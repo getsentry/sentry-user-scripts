@@ -36,3 +36,11 @@ it's annoying to click the SSO button on github -- just do it for me!
 [install](https://github.com/getsentry/sentry-user-scripts/raw/main/fsso.user.js)
 
 ![](https://user-images.githubusercontent.com/103459774/165384953-e2502c02-d6b0-4046-a5e0-d00ed062167a.png)
+
+### i-work-here
+
+I work here!  I don't need the legalese boilerplate in PR descriptions
+
+[install](https://github.com/getsentry/sentry-user-scripts/raw/main/i-work-here.user.js)
+
+![](https://user-images.githubusercontent.com/103459774/190283698-f2043e87-a8db-43e1-a6eb-1cee4917fdd1.png)
