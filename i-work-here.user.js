@@ -14,6 +14,9 @@
     'use strict';
     new MutationObserver((_, observer) => {
         const pr = document.getElementById('pull_request_body');
+        if (!pr) {
+            return;
+        }
         let info = pr.value.match(/\s+<!--\s+Sentry employees and contractors can delete or ignore the following/);
         if (info) {
             pr.value = pr.value.substring(0, info.index);
