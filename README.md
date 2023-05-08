@@ -44,3 +44,9 @@ I work here!  I don't need the legalese boilerplate in PR descriptions
 [install](https://github.com/getsentry/sentry-user-scripts/raw/main/i-work-here.user.js)
 
 ![](https://user-images.githubusercontent.com/103459774/190283698-f2043e87-a8db-43e1-a6eb-1cee4917fdd1.png)
+
+### gocd-auto-signin
+
+Automatically sign in to GoCD
+
+[install](https://github.com/getsentry/sentry-user-scripts/raw/main/gocd-auto-signin.user.js)
