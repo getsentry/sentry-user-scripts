@@ -4,21 +4,24 @@
 // @version      0.1
 // @description  Minor tweaks to GoCD UI
 // @author       matt.gaunt
-// @match        https://deploy*.getsentry.net/**
+// @match        https://deploy.getsentry.net/**
+// @match        https://deploy-staging.getsentry.net/**
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=www.gocd.org
 // @grant        none
 // ==/UserScript==
 
 // Remove the agent links since agents are short lived and are generally 404.
 function dropAgentLink() {
-  const anchors = document.querySelectorAll('.index__agent-cell___1gGiw a');
-  if (anchors.length == 0) {
-      return;
-  }
-
-  for (const a of anchors) {
+  const jobLists = document.querySelectorAll('#scrollable-jobs-table-body');
+  for (const jl of jobLists) {
+    const anchors = jl.querySelectorAll('[data-test-id] > a');
+    for (const a of anchors) {
       const content = a.textContent;
+      if (!content) {
+        continue;
+      }
       a.replaceWith(content);
+    }
   }
 }
 
