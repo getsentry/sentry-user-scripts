@@ -50,3 +50,9 @@ I work here!  I don't need the legalese boilerplate in PR descriptions
 Automatically sign in to GoCD
 
 [install](https://github.com/getsentry/sentry-user-scripts/raw/main/gocd-auto-signin.user.js)
+
+### gocd-ui-tweaks
+
+Automatically sign in to GoCD
+
+[install](https://github.com/getsentry/sentry-user-scripts/raw/main/gocd-ui-tweaks.user.js)
