@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fails-first
 // @namespace    https://asottile.dev
-// @version      0.2
+// @version      1.0
 // @description  put failed statuses first
 // @author       asottile
 // @match        https://github.com/*
@@ -23,8 +23,8 @@
         }
 
         // then sort by name
-        const leftText = left.querySelector('strong[title]').innerText;
-        const rightText = right.querySelector('strong[title]').innerText;
+        const leftText = left.querySelector('strong').innerText;
+        const rightText = right.querySelector('strong').innerText;
         if (leftText < rightText) {
             return -1;
         } else if (leftText > rightText) {
